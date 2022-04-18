@@ -16,3 +16,21 @@ It is a wise idea to check the last ver of fmriprep and replace 2.0.7 accordingl
 mkdir my_images
 singularity build ./my_images/fmriprep-20.0.7.simg docker://poldracklab/fmriprep:20.0.7
 ```
+
+
+## Run the other scripts
+
+Always load relevant module used in the script, such as:
+
+```
+module load fsl/6.0.0
+```
+
+Submit all images/subs
+
+```
+subs=`cat sublist.txt`
+for sub in $subs; do
+sbatch job.sh $sub
+done
+```
