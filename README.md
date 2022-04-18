@@ -17,6 +17,11 @@ mkdir my_images
 singularity build ./my_images/fmriprep-20.0.7.simg docker://poldracklab/fmriprep:20.0.7
 ```
 
+Run preproc -> run_preproc.sh will run job_sigularity_preproc.sh in parallel and save log files
+
+```
+sbatch run_preproc.sh
+```
 
 ## Run the other scripts
 
