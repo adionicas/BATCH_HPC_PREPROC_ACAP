@@ -20,7 +20,7 @@ singularity build ./my_images/fmriprep-20.0.7.simg docker://poldracklab/fmriprep
 
 ## Run the other scripts
 
-Always load relevant module used in the script, such as:
+Always load relevant modules used in the script (if not done in the .sh file), such as:
 
 ```
 module load fsl/6.0.0
