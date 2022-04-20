@@ -33,7 +33,7 @@ module load fsl/6.0.0
 
 Submit all images/subs
 
-```
+```bash
 subs=`cat sublist.txt`
 for sub in $subs; do
 sbatch job.sh $sub
