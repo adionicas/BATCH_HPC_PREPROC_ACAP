@@ -1,6 +1,12 @@
 # BATCH_HPC_PREPROC_ACAP
 A collection of batch scripts that can be used to run fMRI data preprocessing with singularity on a HCP.
 
+List available modules (e.g., singularity, FSL, ANTS)
+
+```
+module avail
+```
+
 ## Prepare sigularity image
 
 Load singuarity and export path
