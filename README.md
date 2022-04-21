@@ -10,14 +10,14 @@ module load singularity/3.4.1
 export PATH=/usr/sbin:$PATH
 ```
 
-It is a wise idea to check the last ver of fmriprep and replace 2.0.7 accordingly
+Convert docker to singularity image (1st arg is outout, second is docker image name)
 
 ```
 mkdir my_images
 singularity build ./my_images/fmriprep-20.0.7.simg docker://poldracklab/fmriprep:20.0.7
 ```
 
-Run preproc -> run_preproc.sh will run job_sigularity_preproc.sh in parallel and save log files
+Run preproc -> run_preproc.sh will submit jobs from job_sigularity_preproc.sh in parallel and save log files
 
 ```
 sbatch run_preproc.sh
@@ -25,7 +25,7 @@ sbatch run_preproc.sh
 
 ## Run the other scripts
 
-Always load relevant modules used in the script (if not done in the .sh file), such as:
+Always load relevant modules used in the script (if not already done in the .sh file), such as:
 
 ```
 module load fsl/6.0.0
@@ -39,3 +39,23 @@ for sub in $subs; do
 sbatch job.sh $sub
 done
 ```
+
+Check if jobs submitted and running:
+
+```
+squeue -u <username>
+```
+
+Cancel one of the jobs according to the id from the squeue:
+
+```
+scancel <jobid>
+```
+
+Cancel all jobs submitted by user
+
+```
+scancel -u <username>
+```
+  
+  
