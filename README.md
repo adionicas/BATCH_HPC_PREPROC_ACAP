@@ -1,13 +1,39 @@
 # BATCH_HPC_PREPROC_ACAP
 A collection of batch scripts that can be used to run fMRI data preprocessing with singularity on a HCP.
 
+## Convert data from dicom to nifti
+
+```
+for sub in $subs; do
+dcm2niix -o ./"$sub"/T1w/ses-01/ -b y -z y ./"$sub"/T1w/ses-01/*
+dcm2niix -o ./"$sub"/T1w/ses-02/ -b y -z y ./"$sub"/T1w/ses-02/*
+
+dcm2niix -o $sub/func/ses-01/ -b y -z y $sub/func/ses-01/*
+dcm2niix -o $sub/func/ses-02/ -b y -z y $sub/func/ses-02/*
+
+mkdir -p BIDS/sub-"$sub"/ses-01/anat
+cp $sub/T1w/ses-01/*.nii.gz BIDS/sub-"$sub"/ses-01/anat/sub-"$sub"_ses-01_T1w.nii.gz
+cp $sub/T1w/ses-01/*.json BIDS/sub-"$sub"/ses-01/anat/sub-"$sub"_ses-01_T1w.json
+mkdir -p BIDS/sub-"$sub"/ses-02/anat
+cp $sub/T1w/ses-02/*.nii.gz BIDS/sub-"$sub"/ses-02/anat/sub-"$sub"_ses-02_T1w.nii.gz
+cp $sub/T1w/ses-02/*.json BIDS/sub-"$sub"/ses-02/anat/sub-"$sub"_ses-02_T1w.json
+
+mkdir -p BIDS/sub-"$sub"/ses-01/func
+cp $sub/func/ses-01/*.nii.gz BIDS/sub-"$sub"/ses-01/func/sub-"$sub"_ses-01_task-rest_bold.nii.gz
+cp $sub/func/ses-01/*.json BIDS/sub-"$sub"/ses-01/func/sub-"$sub"_ses-01_task-rest_bold.json
+mkdir -p BIDS/sub-"$sub"/ses-02/func
+cp $sub/func/ses-02/*.nii.gz BIDS/sub-"$sub"/ses-02/func/sub-"$sub"_ses-02_task-rest_bold.nii.gz
+cp $sub/func/ses-02/*.json BIDS/sub-"$sub"/ses-02/func/sub-"$sub"_ses-02_task-rest_bold.json
+done
+```
+
+## Prepare sigularity image
+
 List available modules (e.g., singularity, FSL, ANTS)
 
 ```
 module avail
 ```
-
-## Prepare sigularity image
 
 Load singuarity and export path
 
