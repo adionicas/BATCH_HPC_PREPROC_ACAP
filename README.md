@@ -3,6 +3,8 @@ A collection of batch scripts that can be used to run fMRI data preprocessing wi
 
 ## Convert data from dicom to nifti
 
+dcm2niix takes as input the dicom images, and turns them into a nifti image; adding -b y also includes the .json file that is needed according to the BIDS specifications
+
 ```
 for sub in $subs; do
 dcm2niix -o ./"$sub"/T1w/ses-01/ -b y -z y ./"$sub"/T1w/ses-01/*
